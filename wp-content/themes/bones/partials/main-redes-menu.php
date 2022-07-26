@@ -8,7 +8,7 @@
 
         <li class="c-menu__icon">
             <a href="<?= $menu->url; ?>">
-                <svg width="30" height="30">
+                <svg width="32" height="32">
                     <title><?= $menu->title; ?></title>
                     <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#<?= $menu->title; ?>" />
                 </svg> 

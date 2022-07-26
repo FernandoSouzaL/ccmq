@@ -1,0 +1,17 @@
+.c-breadcrumbs {
+  margin-top: 2em;
+  margin-bottom: clamp(2em, 5vw, 4em);
+  color: #DDDDDD;
+
+  a {
+    color: #DDDDDD;
+  }
+
+  &--secondary {
+    margin-top: 100px;
+  }
+
+  .breadcrumb_last {
+   color: #A7AFB2; 
+  }
+}

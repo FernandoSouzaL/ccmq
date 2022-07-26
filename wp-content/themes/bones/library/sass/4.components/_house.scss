@@ -1,0 +1,70 @@
+.c-house {
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 60px;
+
+    @include below($sm-max) {
+      grid-template-columns: repeat(1, 1fr);
+      grid-gap: 40px;
+    }
+  }
+
+  &__txt {
+    &-2 {
+      margin-top: 2em;
+    }
+  }
+
+  &__team {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    margin-top: 2em;
+
+    @include below($xs-max) {
+      grid-template-columns: repeat(1, 1fr);
+      justify-content: center;
+      grid-gap: 15px 
+    }
+
+    &-item {
+      padding: 0 10px;
+      box-sizing: border-box;
+      border-right: 2px solid $pink;  
+      
+      &:last-child {
+        border-right: 0;
+      }
+
+      @include below($xs-max) {
+        border-right: none;
+      }
+    }
+
+    h3,
+    p {
+      margin: 0;
+    }
+  }
+
+  &__content {
+    margin: clamp(2em, 5vw, 4em) 0;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: clamp(50px, 5vw, 100px);
+
+    @include below($md) {
+      flex-direction: column;
+    }    
+  }
+
+  &__social-medias {
+    a {
+      margin-left: 10px;
+    }
+  }
+}

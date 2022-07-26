@@ -1,0 +1,44 @@
+.c-search {
+  margin-left: 15px;
+  position: relative;
+
+  &__block {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: $gray;
+    transform: translateY(47px);
+    padding: 5px;
+    width: 272px;
+    display: none;
+  }
+
+  &__form {
+    input {
+      width: 200px;
+      height: 40px;
+      box-sizing: border-box;
+      padding: 0 20px;
+      border: 0;
+    }
+
+    button {
+      height: 40px;
+      outline: none;
+      border: none;
+      background-color: $color-primary;
+      transition: $transition-default;
+      color: $white;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $link-hover-color;
+      }
+    }
+  }
+
+  &__title {
+    margin-top: 100px;
+    margin-bottom: 50px;
+  }
+}

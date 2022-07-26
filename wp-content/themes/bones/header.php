@@ -69,52 +69,30 @@
 
 		<div id="container">
 
-			<header class="c-header js-header" role="banner" itemscope itemtype="http://schema.org/WPHeader">
+			<?php
+				$page = get_the_title();
+
+				if($page == 'Home'):
+			?>
+				<header class="c-header js-header" itemscope itemtype="http://schema.org/WPHeader">
+			<?php else:  ?>
+				<header class="c-header is-active-header-secondary js-header-secondary" itemscope itemtype="http://schema.org/WPHeader">
+			<?php endif; ?>
 
 				<div class="o-wrapper o-wrapper--1280">
 					<div class="c-header__container">
 		
 						<p class="c-header__logo" class="h1" itemscope itemtype="http://schema.org/Organization">
 							<a href="<?php echo home_url(); ?>" rel="nofollow">
-								<svg width="184" height="63">
+								<svg width="279" height="64.212">
 									<title><?php bloginfo( 'name' ); ?></title>
 									<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#logotipo" />
 								</svg>
 							</a>
 						</p>
 		
-						<div class="c-menu">
-		
-							<div class="c-menu__container">
-								<div class="c-menu__close js-active-menu"></div>
+						<?php echo get_template_part('partials/navigation') ?>
 
-								<ul class="c-menu__main">
-									<?php echo get_template_part('partials/main-itens-menu'); ?>
-								</ul>
-								<ul class="c-menu__redes">
-									<?php echo get_template_part('partials/main-redes-menu'); ?>
-								</ul>
-							</div>
-
-							<div class="c-menu__hamburguer js-active-menu">
-								<span></span>
-							</div>
-
-							<div class="c-menu__lang">
-								<div class="c-menu__lang-btn js-lang">
-									<svg width="30" height="30">
-										<title>Pt-br</title>
-										<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#Pt-br" />
-									</svg> 
-								</div>
-
-								<ul class="c-menu__lang-container">
-									<?php echo get_template_part('partials/main-lang-menu'); ?>
-								</ul>
-							</div>
-							
-						</div>
-		
 					</div>
 				</div>
 

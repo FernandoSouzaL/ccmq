@@ -8,13 +8,14 @@
   margin: 0;
   padding: 0.87em 2.3em;
   text-align: center;
-  border-radius: 20px;
+  border-radius: 25px;
 
   &--primary {
     font-size: 16px;
     font-weight: bold;
-    background-color: $color-secondary;
+    background-color: $color-primary;
     color: $white;
+    letter-spacing: 1px;
 
     &:hover {
       background-color: $link-hover-color;
@@ -24,9 +25,10 @@
 
   &--submit {
     width: 100%;
-    background: $color-secondary;
+    background: $color-primary;
     height: 50px;
     padding: 0;
+    font-size: 16px;
     border-radius: 25px;
     font-weight: bold;
     color: $white;
@@ -36,12 +38,12 @@
     }
 
     &:disabled:hover {
-      background: $color-secondary;
+      background: $color-primary;
     }
   }
 
   &__center {
-    margin-top: 2em;
+    margin-top: clamp(2em, 5vw, 4em);
     display: flex;
     justify-content: center;
   }

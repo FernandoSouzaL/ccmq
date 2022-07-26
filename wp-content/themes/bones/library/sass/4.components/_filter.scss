@@ -1,0 +1,76 @@
+.c-filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: clamp(50px, 5vw, 100px);
+  background-color: $gray;
+  height: 70px;
+  box-sizing: border-box;
+  padding-left: clamp(20px, 5vw, 50px);
+
+  @include below($xs-max) {
+    flex-direction: column;
+    height: auto;
+    padding-left: 0;
+  }
+
+  &__control {
+    @include below($xs-max) {
+      width: 100%;
+    }
+
+    &--secondary {
+      display: flex;
+      align-items: center;
+
+      @include below($xs-max) {
+        flex-direction: column;
+        height: auto;
+      }
+    }
+  }
+
+  &__select {
+    background-color: $gray;
+    padding: 25px 25px;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    font-family: $font-primary;
+    appearance: none;
+    background-image: url('../../library/images/arrow-down.svg') !important;
+    background-repeat: no-repeat !important;
+    background-position: 94% !important;
+
+    @include below($xs-max) {
+      width: 100%;
+    }
+  }
+
+  &__btn {
+    display: block;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: $transition-default;
+    border: none;
+    font-family: $font-primary;
+    padding: 0 2.3em;
+    height: 70px;
+    text-align: center;
+    margin-left: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: $color-primary;
+    color: $white;
+    letter-spacing: 1px;
+
+    @include below($xs-max) {
+      margin-left: auto;
+    }
+
+    &:hover {
+      background-color: $link-hover-color;
+      color: $white;
+    }
+  }
+}

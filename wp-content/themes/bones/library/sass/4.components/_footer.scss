@@ -1,5 +1,5 @@
 .c-footer {
-  background: $black;
+  background: $white;
   display: inline-block;
   width: 100%;
 
@@ -10,6 +10,169 @@
       top: 0;
       width: 20px;
       height: 30px;
+    }
+  }
+
+  &__info {
+    display: flex;
+    margin-top: 50px;
+
+    @include below($sm-max) {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include below($xs-max) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+
+  &__menu {
+    list-style: none;
+
+    a {
+      color: $text-color;
+    }
+
+    li {
+      margin-bottom: 5px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &__item {
+    padding: 0 50px;
+    border-right: 1px solid rgba($color: #A7AFB2, $alpha: .15);
+
+    @include below($md-max) {
+      padding: 0 20px;
+    }
+
+    @include below($xs-max) {
+      padding: 0;
+      border: none;
+    }
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+      border-right: none;
+    }
+
+    &:nth-child(3) {
+      @include below($sm-max) {
+        border-right: none;
+        padding-right: 0;
+      }
+    }
+
+    &:nth-child(4) {
+      @include below($sm-max) {
+        padding-left: 0;
+      }
+    }
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @include below($sm) {
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    div {
+      &:first-child {
+        margin-right: 20px;
+        width: 400px;
+        max-width: 100%;
+
+        @include below($sm) {
+          margin-right: 0;
+          margin-bottom: 3em;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+    }
+  }
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2em;
+
+    @include below($sm-max) {
+      flex-direction: column;
+    }
+  }
+
+  &__sponsorship {
+    margin-right: 20px;
+    width: 460px;
+    max-width: 100%;
+
+    @include below($sm-max) {
+      margin-right: 0;
+      margin-bottom: 2em;
+    }
+
+    &-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      @include below($xs-max) {
+        flex-direction: column;
+      }
+
+      div {
+        margin: 5px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  &__realization {
+    width: 717px;
+    max-width: 100%;
+
+    p {
+      @include below($sm-max) {
+        text-align: center;
+      }
+    }
+
+    &-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      @include below($xs-max) {
+        flex-direction: column;
+      }
+
+      div {
+        margin: 5px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
     }
   }
 }

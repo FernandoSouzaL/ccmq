@@ -1,0 +1,45 @@
+.o-grid {
+  display: grid;
+
+  &__col {
+    &-3 {
+      grid-template-columns: repeat(3, 1fr);
+
+      @include below($sm-max) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @include below($xs-max) {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+  }
+
+  &__col {
+    &-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__gap {
+    &-160 {
+      grid-gap: 160px;
+
+      @include below($md-max) {
+        grid-gap: 100px;
+      }
+
+      @include below($md) {
+        grid-gap: 30px;
+      }
+
+      @include below($sm-max) {
+        grid-gap: 20px;
+      }
+    }
+
+    &-60 {
+      grid-gap: 60px
+    }
+  }
+}

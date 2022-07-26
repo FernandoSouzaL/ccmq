@@ -25,33 +25,85 @@
 }
 
 .swiper-buttons {
-  position: relative;
+  position: absolute;
+  z-index: 3;
+  right: 70px;
+  bottom: 75px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-top: 1em;
+
+  @include below($md) {
+    bottom: 40px;
+    right: 28px;
+  }
+
+  @include below($sm) {
+    bottom: 5%;
+    right: 3%;
+  }
+
+  @include below($xs-max) {
+    bottom: 30%;
+    right: 3%;
+    transform: translateY(-15%);
+  }
+
+  @media (max-width: 600px) {
+    display: none;
+  }
 }
 
 .swiper-button {
-  width: 50px;
-  height: 50px;
-  border-radius: 10px;
-  margin: 0 5px;
+  width: 18.5px;
+  height: 32.74px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #EEE;
-  color: $color-secondary;
+  color: $white;
   transition: $transition-default;
 
   &:hover {
-    background: $link-hover-color;
-    color: $white;
+    color: $link-hover-color;
+  }
+
+  &:first-child {
+    margin-right: 33px;
   }
 
   &-disabled {
     opacity: .35;
     pointer-events: none;
+  }
+}
+
+.swiper-pagination {
+  display: none;
+  text-align: center;
+  transition: $transition-default;
+  width: 100%;
+  margin-top: 20px;
+
+  @media (max-width: 600px) {
+    display: block;
+  }
+
+  &-lock {
+    display: none;
+  }
+ 
+  &-bullet {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    border-radius: 50%;
+    background: $color-primary;
+    margin: 0 4px;
+    opacity: .6;
+    
+    &-active {
+      opacity: 1;
+    }
   }
 }

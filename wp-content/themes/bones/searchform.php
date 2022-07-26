@@ -1,8 +1,5 @@
-<form role="search" method="get" id="searchform" class="searchform" action="<?php echo home_url( '/' ); ?>">
-    <div>
-        <label for="s" class="screen-reader-text"><?php _e('Pesquisar:','bonestheme'); ?></label>
-        <input type="search" id="s" name="s" value="" />
+<form role="search" method="get" id="searchform" class="c-search__form" action="<?php echo home_url( '/' ); ?>">
+    <input type="search" id="s" name="s" value="" placeholder="Digite..." />
 
-        <button type="submit" id="searchsubmit" ><?php _e('Ok','bonestheme'); ?></button>
-    </div>
+    <button type="submit" id="searchsubmit" >Pesquisar</button>
 </form>

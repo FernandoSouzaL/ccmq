@@ -14,13 +14,34 @@
 // Objects
 @import '3.objects/button';
 @import '3.objects/wrapper';
+@import '3.objects/grid';
 @import '3.objects/input';
 @import '3.objects/typo';
 
 // Components
 @import '4.components/header';
 @import '4.components/menu';
+@import '4.components/slider';
+@import '4.components/banner';
+@import '4.components/background';
+@import '4.components/breadcrumbs';
+@import '4.components/video';
+@import '4.components/house';
+@import '4.components/single-house';
+@import '4.components/institutes';
+@import '4.components/contact';
+@import '4.components/form';
+@import '4.components/visit';
+@import '4.components/news';
+@import '4.components/single-news';
+@import '4.components/filter';
+@import '4.components/prog';
+@import '4.components/search';
 @import '4.components/footer';
+
+// Home
+@import '4.components/home';
+
 
 // Trumps
 @import '5.trumps/print';
@@ -28,3 +49,4 @@
 // Vendor
 @import '6.vendor/swiper';
 @import '6.vendor/contact-form';
+@import '6.vendor/calendar';

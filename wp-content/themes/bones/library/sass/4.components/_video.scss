@@ -1,0 +1,35 @@
+.c-video {
+  width: 100%;
+  height: auto;
+
+  &--desktop {
+    @include below($xs-max) {
+      display: none;
+    }
+  }
+
+  &--mobile {
+    display: none;
+
+    @include below($xs-max) {
+      display: block;
+    }
+  }
+
+  &__title {
+    width: 90%;
+    padding: 0 5%;
+    position: absolute;
+    bottom: 30%;
+    z-index: 3;
+
+    @include below($md-max) {
+      bottom: 20%;
+    }
+
+    @include below($sm) {
+      bottom: 10%;
+      font-size: 25px;
+    }
+  }
+}

@@ -31,3 +31,13 @@ svg,
 video {
   vertical-align: middle;
 }
+
+html {
+  &.is-active-menu-mobile {
+    overflow: hidden;
+  }
+}
+
+.c-main {
+  overflow: hidden;
+}

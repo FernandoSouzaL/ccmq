@@ -1,8 +1,26 @@
 .c-header {
-  background-color: $black;
-  position: sticky;
+  background-image: linear-gradient(to bottom, rgba(0,0,0,.5), transparent);
+  background-color: transparent;
+  position: fixed;
   top: 0;
   transition: $transition-default;
+  width: 100%;
+  z-index: 99;
+
+  &.is-active-header {
+    background-color: $white;
+    background-image: none;
+    box-shadow: 0 2px rgba(0,0,0,.1);
+  }
+
+  &.is-active-header-secondary {
+    background-color: $white;
+    background-image: none;
+  }
+
+  &.is-active-border {
+    box-shadow: 0 2px rgba(0,0,0,.1);
+  }
 
   &__container {
     display: flex;
@@ -11,7 +29,25 @@
   }
 
   &__logo {
-    margin: .75em 0;
+    margin: 1.75em auto;
+
+    @include below($xs-max) {
+      margin: .75em auto;
+    }
+
+    .is-active-header &,
+    .is-active-header-secondary & {
+      margin: .75em 0;
+    }
+    
+    a {
+      color: $white;
+
+      .is-active-header &,
+      .is-active-header-secondary & {
+        color: $color-primary;
+      }
+    }
     
     a {
       display: inline-block;
@@ -19,22 +55,11 @@
     
     svg {
       transition: $transition-default;
-    }
-  }
-
-  &.is-active {
-    .c-header__logo {
-      svg {
-        width: 140px;
-        height: 48px;
-      }
-    }
-
-    .c-menu__main {
-      & > .c-menu__item {
-        & > a {
-          padding: 20px 0;
-        }
+      
+      .is-active-header &,
+      .is-active-header-secondary & {
+        width: 226px;
+        height: 52px;
       }
     }
   }

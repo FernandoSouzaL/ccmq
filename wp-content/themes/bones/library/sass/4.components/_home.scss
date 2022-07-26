@@ -1,0 +1,12 @@
+.c-home {
+  overflow: hidden;
+
+  &__info {
+    padding-left: clamp(2em, 5vw, 4em);
+    padding-right: clamp(2em, 5vw, 4em);
+  }
+
+  &__schedule {
+    margin: clamp(2em, 5vw, 4em) 0;
+  }
+}

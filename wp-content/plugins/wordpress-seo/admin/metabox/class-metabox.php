@@ -298,6 +298,10 @@ class WPSEO_Metabox extends WPSEO_Meta {
 			$values['semrushIntegrationActive'] = 0;
 		}
 
+		if ( $values['wincherIntegrationActive'] && $this->post->post_type === 'attachment' ) {
+			$values['wincherIntegrationActive'] = 0;
+		}
+
 		return $values;
 	}
 
@@ -707,7 +711,8 @@ class WPSEO_Metabox extends WPSEO_Meta {
 			return false;
 		}
 
-		if ( ! isset( $_POST['yoast_free_metabox_nonce'] ) || ! wp_verify_nonce( $_POST['yoast_free_metabox_nonce'], 'yoast_free_metabox' ) ) {
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Sanitized in wp_verify_none.
+		if ( ! isset( $_POST['yoast_free_metabox_nonce'] ) || ! wp_verify_nonce( wp_unslash( $_POST['yoast_free_metabox_nonce'] ), 'yoast_free_metabox' ) ) {
 			return false;
 		}
 
@@ -834,6 +839,7 @@ class WPSEO_Metabox extends WPSEO_Meta {
 		}
 
 		$post_id = get_queried_object_id();
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if ( empty( $post_id ) && isset( $_GET['post'] ) ) {
 			$post_id = sanitize_text_field( filter_input( INPUT_GET, 'post' ) );
 		}
@@ -855,9 +861,6 @@ class WPSEO_Metabox extends WPSEO_Meta {
 		}
 		$asset_manager->enqueue_script( $post_edit_handle );
 		$asset_manager->enqueue_style( 'admin-css' );
-
-		$yoast_components_l10n = new WPSEO_Admin_Asset_Yoast_Components_L10n();
-		$yoast_components_l10n->localize_script( $post_edit_handle );
 
 		/**
 		 * Removes the emoji script as it is incompatible with both React and any
@@ -894,17 +897,19 @@ class WPSEO_Metabox extends WPSEO_Meta {
 
 		$script_data = [
 			// @todo replace this translation with JavaScript translations.
-			'media'            => [ 'choose_image' => __( 'Use Image', 'wordpress-seo' ) ],
-			'metabox'          => $this->get_metabox_script_data(),
-			'userLanguageCode' => WPSEO_Language_Utils::get_language( \get_user_locale() ),
-			'isPost'           => true,
-			'isBlockEditor'    => $is_block_editor,
-			'analysis'         => [
+			'media'                      => [ 'choose_image' => __( 'Use Image', 'wordpress-seo' ) ],
+			'metabox'                    => $this->get_metabox_script_data(),
+			'userLanguageCode'           => WPSEO_Language_Utils::get_language( \get_user_locale() ),
+			'isPost'                     => true,
+			'isBlockEditor'              => $is_block_editor,
+			'postStatus'                 => get_post_status( $post_id ),
+			'analysis'                   => [
 				'plugins'                     => $plugins_script_data,
 				'worker'                      => $worker_script_data,
 				'estimatedReadingTimeEnabled' => $this->estimated_reading_time_conditional->is_met(),
 			],
-			'dismissedAlerts'  => $dismissed_alerts,
+			'dismissedAlerts'            => $dismissed_alerts,
+			'webinarIntroBlockEditorUrl' => WPSEO_Shortlinker::get( 'https://yoa.st/webinar-intro-block-editor' ),
 		];
 
 		if ( post_type_supports( get_post_type(), 'thumbnail' ) ) {
@@ -1087,6 +1092,11 @@ class WPSEO_Metabox extends WPSEO_Meta {
 		}
 
 		$custom_fields = get_post_custom( $post->ID );
+
+		// If $custom_fields is an empty string or generally not an array, return early.
+		if ( ! is_array( $custom_fields ) ) {
+			return $custom_replace_vars;
+		}
 
 		foreach ( $custom_fields as $custom_field_name => $custom_field ) {
 			// Skip private custom fields.

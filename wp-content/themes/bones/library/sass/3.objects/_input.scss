@@ -13,16 +13,23 @@
   background-color: $gray;
 
   &--textarea {
-    min-height: 130px;
+    min-height: 215px;
+    padding-top: .25em;
+  }
+
+  &--select {
+    color: $text-color;
+    appearance: none;
+    background-image: url('../../library/images/arrow-down.svg') !important;
+    background-repeat: no-repeat !important;
+    background-position: 94% !important;
   }
 
   &--accept {
-      width: 20px;
-      height: 20px;
-      padding: 0;
-      margin-right: 15px;
-      display: inline-block;
-      vertical-align: middle;
+    position: absolute;
+    opacity: 0;
+    width: 20px;
+    height: 20px;
   }
 
   &--btn {

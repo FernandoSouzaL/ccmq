@@ -83,31 +83,23 @@ jQuery(document).ready(function ($) {
     });
   });
 
-  var swiper = new Swiper('.swiper-container', {
+  var swiper = new Swiper('.js-slider-highlights', {
     slidesPerView: 'auto',
-    centeredSlides: true,
-    paginationClickable: true,
-    //spaceBetween: 5000,
-    autoplay: {
-      delay: 8000,
+    spaceBetween: 122,
+    navigation: {
+      nextEl: ".js-slider-highlights .swiper-button-next",
+      prevEl: ".js-slider-highlights .swiper-button-prev",
     },
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullets',
-      clickable: true,
-    },
-    //loop: true,
-    // breakpoints: {
-    //     // when window width is <= 320px
-    //     1024: {
-    //       slidesPerView: 2,
-    //     },
-    //     // when window width is <= 480px
-    //     768: {
-    //       slidesPerView: 1,
-    //       spaceBetween: 20
-    //     }
-    //   }
+    breakpoints: {
+      767: {
+        spaceBetween: 30
+      },
+      600: {
+        pagination: {
+          el: ".js-slider-highlights .swiper-pagination",
+        },
+      }
+    }
   });
 
   // Menu mobile
@@ -117,13 +109,25 @@ jQuery(document).ready(function ($) {
 
   // Anima header
   $(window).on('scroll', function() {
-    let header = $('.js-header');
-    let $this = $(this);
-
-    if ($this.scrollTop() != 0) {
-      header.addClass('is-active');
+    const $this = $(this);
+    const $html = $('.js-header');
+    
+    if ($this.scrollTop() == 0) {
+      $html.removeClass('is-active-header');
     } else {
-      header.removeClass('is-active');
+      $html.addClass('is-active-header');
+    }
+  });
+
+  // Anima header secondary
+  $(window).on('scroll', function() {
+    const $this = $(this);
+    const $html = $('.js-header-secondary');
+    
+    if ($this.scrollTop() == 0) {
+      $html.removeClass('is-active-border');
+    } else {
+      $html.addClass('is-active-border');
     }
   });
 
@@ -132,14 +136,39 @@ jQuery(document).ready(function ($) {
     e.preventDefault();
   });
 
-  // ADD current menu
-  $('.js-current').parent().parent().parent().find('.js-no-action').addClass('c-menu__current');
+  // Toggle sub submenu
+  $('.js-active-menu-space').on('click', function(e) {
+    e.preventDefault();
+    $('html').toggleClass('is-active-menu-space');
+  });
 
-  // Active lang menu
-  $('.js-lang').on('click', function() {
-    $('.c-menu__lang-container').toggleClass('is-active');
-    $(this).toggleClass('is-active');
-  })
+  // Toggle institutes
+  $('.js-institutes').on('click', function() {
+    $this = $(this);
+
+    $this.parent().find('.c-institutes__content').slideToggle();
+    $this.toggleClass('is-active-toggle');
+  });
+
+  // Toggle cat
+  $('.js-toggle-cat').on('click', function() {
+    $this = $(this);
+
+    $this.parent().find('.c-sub-menu__cat-content').slideToggle();
+    $this.toggleClass('is-active-cat');
+  });
+
+  // Search
+  $('.js-search').on('click', function(e) {
+    e.preventDefault();
+
+    $(this).parent().find('.c-search__block').slideToggle();
+  });
+
+  // Active menu mobile
+  $('.js-active-menu-mobile').on('click', function() {
+    $('html').toggleClass('is-active-menu-mobile');
+  });
 
   // ANIMA MENU
   /* $('#menu-principal a').click(function(e){

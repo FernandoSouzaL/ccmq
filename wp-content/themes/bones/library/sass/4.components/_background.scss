@@ -1,0 +1,17 @@
+.c-bg {
+  padding-top: clamp(2em, 5vw, 4em);
+  padding-bottom: clamp(2em, 5vw, 4em);
+
+  &--gray {
+    background-color: $gray;
+  }
+
+  &--wine {
+    background-color: $color-primary;
+  }
+
+  &--margin {
+    margin-top: clamp(50px, 5vw, 100px);
+    margin-bottom: clamp(50px, 5vw, 100px);
+  }
+}

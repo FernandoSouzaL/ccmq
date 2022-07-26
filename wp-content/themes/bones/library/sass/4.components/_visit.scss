@@ -1,0 +1,46 @@
+.c-visit {
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 60px;
+    align-items: center;
+
+    @include below($sm-max) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+
+  &__text {
+    margin-bottom: clamp(50px, 5vw, 100px);
+
+    h2 {
+      font-size: clamp(25px, 5vw, 35px);
+      font-family: $font-secondary;
+      line-height: 1.2;
+      margin-bottom: .5em;
+      margin-top: 0;
+    }
+  }
+
+  &__txt {
+    & > p {
+      color: $white
+    }
+  }
+
+  &__info {
+    display: flex;
+
+    @include below($xs-max) {
+      flex-direction: column;
+    }
+    
+    p {
+      word-wrap: break-word;
+
+      &:first-child {
+        margin-right: 35px;
+      }
+    }
+  }
+}

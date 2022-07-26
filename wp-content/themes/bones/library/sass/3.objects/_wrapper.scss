@@ -1,8 +1,10 @@
 .o-wrapper {
   margin: 0 auto;
-  padding: 0 3%;
+  padding: 0 5%;
+  box-sizing: border-box;
 
-  &--1280 {
-    max-width: 1280px;
-  }
+  @include wrapper(1420, 5);
+  @include wrapper(1280, 5);
+  @include wrapper(1140, 5);
+  @include wrapper(870, 5);
 }

@@ -160,7 +160,7 @@ function bones_register_sidebars() {
 		'description' => __( 'The first (primary) sidebar.', 'bonestheme' ),
 		'before_widget' => '<div id="%1$s" class="widget %2$s">',
 		'after_widget' => '</div>',
-		'before_title' => '<h4 class="widgettitle">',
+		'before_title' => '<h4 class="o-ttl--16 o-ttl--pink o-ttl--bold">',
 		'after_title' => '</h4>',
 	));
 
@@ -462,5 +462,128 @@ function tsm_convert_id_to_term_in_query($query) {
     $output .= "</div>\n";
     return $output;
   }*/
+
+  add_action( 'wp_enqueue_scripts', 'script_filter' );
+
+  function script_filter() {
+    global $wp_query;
+
+    wp_register_script( 'scripts', get_stylesheet_directory_uri() . '/public/js/main-filter.js', array('jquery') );
+
+    wp_localize_script( 'scripts', 'loadmore_params', array(
+      'ajaxurl'      => site_url() . '/wp-admin/admin-ajax.php',
+      'posts'        => json_encode( $wp_query->query_vars ),
+      'current_page' => $wp_query->query_vars['paged'] ? $wp_query->query_vars['paged'] : 1,
+      'max_page'     => $wp_query->max_num_pages
+    ) );
+
+    wp_enqueue_script( 'scripts' );
+  }
+
+  add_action('wp_ajax_loadmorebutton', 'loadmore_ajax_handler');
+  add_action('wp_ajax_nopriv_loadmorebutton', 'loadmore_ajax_handler');
+
+  function loadmore_ajax_handler() {
+    $params = json_decode( stripslashes( $_POST['query'] ), true );
+    $params['paged'] = $_POST['page'] + 1;
+    $params['post_status'] = 'publish';
+
+    query_posts( $params );
+
+    if( have_posts() ):
+
+      while( have_posts() ): the_post();
+
+        get_template_part( 'partials/news-item' );
+
+      endwhile;
+    endif;
+
+    die;
+  }
+
+  add_action('wp_ajax_filter', 'filter_function');
+  add_action('wp_ajax_nopriv_filter', 'filter_function');
+
+  function filter_function() {
+    $params = array(
+      'post-type'      => 'noticias',
+      'posts_per_page' => $_POST['number_of_results'],
+      'order'          => 'DESC' 
+    );
+
+    $data     = $_POST['data'];
+    $category = $_POST['category'];
+    $public   = $_POST['public'];
+
+    if( isset($data) || isset($category) || isset($public) ) {
+      $params['tax_query'] = array(
+        'relation'   => 'OR', 
+        array( 
+          'taxonomy' => 'datas', 
+          'field'    => 'id', 
+          'terms'    => array( $data ), 
+        ), 
+        array( 
+          'taxonomy' => 'categories', 
+          'field'    => 'id', 
+          'terms'    => array( $category ), 
+        ), 
+        array( 
+          'taxonomy' => 'publico', 
+          'field'    => 'id', 
+          'terms'    => array( $public ), 
+        )
+      );
+    } elseif( isset($data) && isset($category) && isset($public) ) {
+      $params['tax_query'] = array(
+        'relation'   => 'AND', 
+        array( 
+          'taxonomy' => 'datas', 
+          'field'    => 'id', 
+          'terms'    => array( $data ), 
+        ), 
+        array( 
+          'taxonomy' => 'categories', 
+          'field'    => 'id', 
+          'terms'    => array( $category ), 
+        ), 
+        array( 
+          'taxonomy' => 'publico', 
+          'field'    => 'id', 
+          'terms'    => array( $public ), 
+        )
+      );
+    } 
+ 
+    query_posts( $params );
+
+    global $wp_query;
+
+    if( have_posts() ) {
+      ob_start();
+
+      while( have_posts() ): the_post();
+
+        get_template_part( 'partials/news-item' );
+
+      endwhile;
+
+      $posts_html = ob_get_contents();
+      ob_end_clean();
+    } else {
+      $posts_html = '<h2>Nada encontrado para seus critérios.</h2>';
+    }
+
+    echo json_encode( array (
+      'posts'       => json_encode( $wp_query->query_vars ),
+      'max_page'    => $wp_query->max_num_pages,
+      'found_posts' => $wp_query->found_posts,
+      'content'     => $posts_html
+    ) );
+
+    die();
+  }
+
 
 /* DON'T DELETE THIS CLOSING TAG */ ?>
